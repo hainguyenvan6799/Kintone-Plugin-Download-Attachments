@@ -26,10 +26,22 @@ function addElementsToParentContainer(
   });
 }
 
+function disableButton(buttonInstance) {
+  buttonInstance.setAttribute({
+    disabled: "disabled"
+  });
+}
+
+function resetDisableButton(buttonInstance) {
+  buttonInstance.getElement().removeAttribute("disabled");
+}
+
 export {
   convertKbToMb,
   doZipFile,
   saveZipFile,
   formatCurrentDateTime,
   addElementsToParentContainer,
+  disableButton,
+  resetDisableButton
 };

@@ -24,9 +24,5 @@ jQuery.noConflict();
           event.records
         )
       );
-
-    $(".modal").on('hidden.bs.modal', function (e) {
-      headerSpace.removeChild(headerSpace.childNodes[1]);
-    })
   });
 })(jQuery, kintone.$PLUGIN_ID);

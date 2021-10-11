@@ -1,5 +1,4 @@
 import { Notification } from "kintone-ui-component";
-
 import { createDownloadAttachmentDialog } from "Components/DownloadDialog";
 
 import {
@@ -18,6 +17,8 @@ import { getAppRecords } from "Services";
 import {
   doZipFile,
   saveZipFile,
+  disableButton,
+  resetDisableButton,
 } from "Utilities";
 import { updateToSpinnerButton } from "Components/SpinnerButton";
 
@@ -75,7 +76,8 @@ function initialDownloadDialogWithSelectAll({
 
 function handleWhenClickDownloadButtonInsideDialog(
   pluginConfig,
-  downloadButtonInsideDialog
+  downloadButtonInsideDialog,
+  cancelButton
 ) {
   const valueOfCheckBoxAreChecked =
     getCheckBoxesAreCheckedWithName("selectRecord");
@@ -87,10 +89,13 @@ function handleWhenClickDownloadButtonInsideDialog(
     downloadButtonInsideDialog
   );
 
+  disableButton(cancelButton);
+
   handleDownloadAttachments(pluginConfig, listIdsCheckBoxesAreChecked).then(
     (isDone) => {
       if (isDone) {
         resetDownloadButton(updatedButton, loadingSpinner);
+        resetDisableButton(cancelButton);
       }
     }
   );
@@ -156,6 +161,10 @@ function handleWhenClickFullScreenIcon(modalDialog) {
   });
 }
 
+function handleWhenClickCancelButton(headerSpace) {
+  headerSpace.removeChild(headerSpace.lastElementChild);
+}
+
 function handleIfEnableSelectedRecord(
   pluginConfig,
   headerSpace,
@@ -164,11 +173,12 @@ function handleIfEnableSelectedRecord(
   let totalSize = 0;
 
   const recordsHaveAttachments = recordsIndexView.filter(
-    (record) => record["Attachment"].value.length > 0
+    (record) => record.Attachment.value.length > 0
   );
 
   const {
     downloadModal,
+    cancelButton,
     modalDialog,
     downloadButton: downloadButtonInsideDialog,
     fullScreenButton,
@@ -192,7 +202,8 @@ function handleIfEnableSelectedRecord(
     .addEventListener("click", () =>
       handleWhenClickDownloadButtonInsideDialog(
         pluginConfig,
-        downloadButtonInsideDialog
+        downloadButtonInsideDialog,
+        cancelButton
       )
     );
 
@@ -221,6 +232,10 @@ function handleIfEnableSelectedRecord(
     .addEventListener("click", () =>
       handleWhenClickFullScreenIcon(modalDialog)
     );
+
+  cancelButton
+    .getElement()
+    .addEventListener("click", () => handleWhenClickCancelButton(headerSpace));
 
   downloadModal.addSubElementToElement(headerSpace);
 }
