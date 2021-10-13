@@ -22,12 +22,12 @@ import {
 } from "Utilities";
 import { updateToSpinnerButton } from "Components/SpinnerButton";
 
-function handleDownloadAttachments(config, listIds = null) {
+function handleDownloadAttachments(config, listIds = null, listSelectedFileKey = null) {
   const fieldCode = "Attachment";
   const isGuestSpace = false;
 
   return getAppRecords(fieldCode, isGuestSpace, listIds)
-    .then((allRecords) => getFileKeys(allRecords, fieldCode))
+    .then((allRecords) => getFileKeys(allRecords, fieldCode, listSelectedFileKey))
     .then((fileKeys) => checkFileSize(fileKeys, config.sizeLimit))
     .then((fileKeys) => addfileURLs(fileKeys, isGuestSpace))
     .then(downloadFiles)
@@ -45,11 +45,20 @@ function handleDownloadAttachments(config, listIds = null) {
       return isDoneDownload;
     })
     .catch(function (error) {
-      const errorMessage = new Notification({
-        text: error,
-        type: "danger",
-        className: "options-class",
-      });
+      let errorMessage;
+      if(error?.type === "logic") {
+        errorMessage = new Notification({
+          text: error.message,
+          type: "danger",
+          className: "options-class",
+        });
+      } else {
+        errorMessage = new Notification({
+          text: "Errors occur during download.",
+          type: "danger",
+          className: "options-class",
+        });
+      }
       errorMessage.open();
       const isDoneDownload = true;
       return isDoneDownload;

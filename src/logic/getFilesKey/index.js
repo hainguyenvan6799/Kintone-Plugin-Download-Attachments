@@ -1,9 +1,11 @@
+import { getSpecificFileKey } from "../getSpecificFileKey";
+
 function addRecordAttachmentsAndTitleToFileKeys(
   recordAttachments,
   fileKeys,
   recordTitle
 ) {
-  for (var j = 0; j < recordAttachments.value.length; j++) {
+  for (let j = 0; j < recordAttachments.value.length; j++) {
     fileKeys.push({
       ...recordAttachments.value[j],
       title: recordTitle,
@@ -19,23 +21,25 @@ function getRecordAttachmentsAndTitle(allRecords, fieldCode, i) {
   return { recordAttachments, recordTitle };
 }
 
-function getFileKeys(allRecords, fieldCode) {
-  var fileKeys = [];
-  for (var i = 0; i < allRecords.records.length; i++) {
-    const { recordAttachments, recordTitle } = getRecordAttachmentsAndTitle(
-      allRecords,
-      fieldCode,
-      i
-    );
-    // When multiple files are attached
-    addRecordAttachmentsAndTitleToFileKeys(
-      recordAttachments,
-      fileKeys,
-      recordTitle
-    );
-  }
-
-  return fileKeys;
+function getFileKeys(allRecords, fieldCode, listSelectedFileKey) {
+    let fileKeys = [];
+    for (let i = 0; i < allRecords.records.length; i++) {
+      const { recordAttachments, recordTitle } = getRecordAttachmentsAndTitle(
+        allRecords,
+        fieldCode,
+        i
+      );
+      // When multiple files are attached
+      addRecordAttachmentsAndTitleToFileKeys(
+        recordAttachments,
+        fileKeys,
+        recordTitle
+      );
+    }
+    if (listSelectedFileKey) {
+      return getSpecificFileKey(fileKeys, listSelectedFileKey);
+    }
+    return fileKeys;
 }
 
 export { getFileKeys };

@@ -3,14 +3,14 @@ function convertKbToMb(numberInKb) {
 }
 
 function doZipFile(zip) {
-  return zip.generateAsync({ type: "blob" });
+    return zip.generateAsync({ type: "blob" });
 }
 
 function saveZipFile(fileObject) {
-  return saveAs(
-    fileObject,
-    `${formatCurrentDateTime("YYYY-MM-DD_HH:m:s")}.zip`
-  );
+    return saveAs(
+      fileObject,
+      `${formatCurrentDateTime("YYYY-MM-DD_HH:m:s")}.zip`
+    );
 }
 
 function formatCurrentDateTime(dateTimeFormat) {
@@ -36,6 +36,10 @@ function resetDisableButton(buttonInstance) {
   buttonInstance.getElement().removeAttribute("disabled");
 }
 
+function checkValueExistInArray(targetValue, targetArray = []) {
+  return targetArray.includes(targetValue);
+}
+
 export {
   convertKbToMb,
   doZipFile,
@@ -43,5 +47,6 @@ export {
   formatCurrentDateTime,
   addElementsToParentContainer,
   disableButton,
-  resetDisableButton
+  resetDisableButton,
+  checkValueExistInArray
 };

@@ -14,10 +14,15 @@ function recursiveAddFileUrls(
 }
 
 function addfileURLs(fileKeys, isGuestSpace, keyNum) {
-  let increasingKeyNum = keyNum || 0;
-  return addFileURL(fileKeys[increasingKeyNum], isGuestSpace).then(() =>
-    recursiveAddFileUrls(fileKeys, increasingKeyNum, addfileURLs, isGuestSpace)
-  );
+    let increasingKeyNum = keyNum || 0;
+    return addFileURL(fileKeys[increasingKeyNum], isGuestSpace).then(() =>
+      recursiveAddFileUrls(
+        fileKeys,
+        increasingKeyNum,
+        addfileURLs,
+        isGuestSpace
+      )
+    );
 }
 
 export { addfileURLs };
