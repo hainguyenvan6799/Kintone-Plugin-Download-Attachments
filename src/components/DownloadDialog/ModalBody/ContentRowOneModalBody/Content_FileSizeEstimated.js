@@ -1,6 +1,6 @@
-import { CustomDiv, CustomParagraph } from "../../..";
-import { addElementsToParentContainer } from "../../../../utils";
-import BasicElement from "../../../BasicElement";
+import { CustomDiv, CustomParagraph } from "Components";
+import { addElementsToParentContainer } from "Utilities";
+import BasicElement from "Components/BasicElement";
 
 function createCurrentTotalFileSize(currentTotalSize) {
   const elementToDisplaySize = new BasicElement("span", currentTotalSize);

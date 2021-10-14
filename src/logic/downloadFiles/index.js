@@ -4,13 +4,18 @@ function addDownloadedFileToFolderAndPackage(paramsObject) {
   if (error) {
     reject(error);
   }
-  var recordAttachments = zipTool.folder(recordTitle);
+  let recordAttachments = zipTool.folder(recordTitle);
   recordAttachments.file(`${Date.now()}_${fileName}`, data, { binary: true });
 
   resolve(data);
 }
 
-function retrieveFilesDownloadFromUrls(zipTool, urlToDownload, fileName, recordTitle) {
+function retrieveFilesDownloadFromUrls(
+  zipTool,
+  urlToDownload,
+  fileName,
+  recordTitle
+) {
   return new kintone.Promise(function (resolve, reject) {
     // getBinaryContent is an API that retrieves filesDownload from URLs asynchronously
     JSZipUtils.getBinaryContent(urlToDownload, (error, data) =>
@@ -28,22 +33,21 @@ function retrieveFilesDownloadFromUrls(zipTool, urlToDownload, fileName, recordT
 }
 
 function downloadFiles(filesDownload, anotherZip, fileNum) {
-  console.log("in download filesDownload");
-  var zipTool = anotherZip || new JSZip();
-  var indexOfFile = fileNum || 0;
+    let zipTool = anotherZip || new JSZip();
+    let indexOfFile = fileNum || 0;
 
-  return retrieveFilesDownloadFromUrls(
-    zipTool,
-    filesDownload[indexOfFile]["blobUrl"],
-    filesDownload[indexOfFile]["name"],
-    filesDownload[indexOfFile]["title"]
-  ).then(function (data) {
-    indexOfFile++;
-    if (indexOfFile === filesDownload.length) {
-      return zipTool;
-    }
-    return downloadFiles(filesDownload, zipTool, indexOfFile);
-  });
+    return retrieveFilesDownloadFromUrls(
+      zipTool,
+      filesDownload[indexOfFile]["blobUrl"],
+      filesDownload[indexOfFile]["name"],
+      filesDownload[indexOfFile]["title"]
+    ).then(function (data) {
+      indexOfFile++;
+      if (indexOfFile === filesDownload.length) {
+        return zipTool;
+      }
+      return downloadFiles(filesDownload, zipTool, indexOfFile);
+    });
 }
 
 export { downloadFiles };

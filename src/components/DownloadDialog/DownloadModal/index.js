@@ -1,4 +1,4 @@
-import { CustomDiv } from "../..";
+import { CustomDiv } from "Components";
 
 function createDownloadModal() {
   const downloadModal = new CustomDiv();

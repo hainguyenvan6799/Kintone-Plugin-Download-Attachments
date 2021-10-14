@@ -1,4 +1,4 @@
-import { CustomDiv } from "../../..";
+import { CustomDiv } from "Components";
 
 function addSubElementsForContainerLabelAndCheckBox(containerLabelAndCheckBox, checkBox, labelOfCheckBox, textDisplay) {
   checkBox.addSubElementToElement(labelOfCheckBox.getElement());

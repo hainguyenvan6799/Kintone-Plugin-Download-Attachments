@@ -2,6 +2,10 @@ function convertKbToMb(numberInKb) {
   return numberInKb / Math.pow(1024, 2);
 }
 
+function convertMbToKb(numberInMb) {
+  return numberInMb * Math.pow(1024, 2);
+}
+
 function doZipFile(zip) {
     return zip.generateAsync({ type: "blob" });
 }
@@ -42,6 +46,7 @@ function checkValueExistInArray(targetValue, targetArray = []) {
 
 export {
   convertKbToMb,
+  convertMbToKb,
   doZipFile,
   saveZipFile,
   formatCurrentDateTime,

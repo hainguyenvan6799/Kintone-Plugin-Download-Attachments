@@ -1,5 +1,5 @@
-import { CustomDiv } from "../../..";
-import { addElementsToParentContainer } from "../../../../utils";
+import { CustomDiv } from "Components";
+import { addElementsToParentContainer } from "Utilities";
 import { createCheckBoxDialog, createContainerCheckBoxAndLabel, createLabelCheckBoxDialog } from "../CheckBoxAndLabel";
 
 function createColumnContainSelectAllCheckBox() {

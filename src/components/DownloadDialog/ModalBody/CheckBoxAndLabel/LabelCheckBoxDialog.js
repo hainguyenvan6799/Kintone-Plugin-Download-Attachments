@@ -1,4 +1,4 @@
-import { CustomLabel } from "../../..";
+import { CustomLabel } from "Components";
 
 function createLabelCheckBoxDialog(labelFor = "") {
   const labelObject = new CustomLabel();

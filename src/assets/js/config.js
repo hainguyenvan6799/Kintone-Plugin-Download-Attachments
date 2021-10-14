@@ -10,6 +10,7 @@ jQuery.noConflict();
   }
 
   function settingPlugin(isEnableSelectRecordForAttachmentDownload, sizeLimit) {
+    const $sizeLimit = $(".js-size-limit");
     if (!validateSizeLimit($sizeLimit.val())) {
       alert("Size limit must be greater than 0.");
     } else {

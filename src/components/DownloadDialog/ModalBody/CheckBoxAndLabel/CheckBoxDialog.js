@@ -1,4 +1,4 @@
-import { CustomCheckBox } from "../../..";
+import { CustomCheckBox } from "Components";
 
 function createCheckBoxDialog(nameOfCheckBox, idOfCheckBox, valueOfCheckBox = "") {
   const checkBoxDownloadDialog = new CustomCheckBox();
