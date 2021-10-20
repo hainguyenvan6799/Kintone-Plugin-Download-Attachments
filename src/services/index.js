@@ -1,2 +1,2 @@
-export * from "./Record";
-export * from "./File";
+export * from './Record';
+export * from './File';

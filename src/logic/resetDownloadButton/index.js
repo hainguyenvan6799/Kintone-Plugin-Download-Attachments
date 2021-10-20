@@ -1,7 +1,7 @@
-function resetDownloadButton(updatedButton, loadingSpinner) {
-    updatedButton.getElement().innerHTML = "Download Attachments";
-    updatedButton.getElement().removeAttribute("disabled")
-    loadingSpinner.getElement().remove();
+function resetDownloadButton(buttonWasUpdated, loadingSpinner) {
+  buttonWasUpdated.setInnerHTML('Download Attachments');
+  buttonWasUpdated.toggleDisable(false);
+  loadingSpinner.remove();
 }
 
-export { resetDownloadButton };
+export {resetDownloadButton};

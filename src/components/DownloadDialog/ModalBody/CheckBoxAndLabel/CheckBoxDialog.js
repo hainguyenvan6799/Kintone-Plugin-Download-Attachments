@@ -1,13 +1,13 @@
-import { CustomCheckBox } from "Components";
+import {CustomCheckBox} from 'Components';
 
-function createCheckBoxDialog(nameOfCheckBox, idOfCheckBox, valueOfCheckBox = "") {
+function createCheckBoxDialog(nameOfCheckBox, idOfCheckBox, valueOfCheckBox = '') {
   const checkBoxDownloadDialog = new CustomCheckBox();
 
   const checkBoxDownloadDialogAttributes = {
-    type: "checkbox",
+    type: 'checkbox',
     name: nameOfCheckBox,
     id: idOfCheckBox,
-    class: "form-check-input mt-3",
+    class: 'form-check-input mt-3',
     value: valueOfCheckBox,
     checked: true
   };
@@ -17,4 +17,4 @@ function createCheckBoxDialog(nameOfCheckBox, idOfCheckBox, valueOfCheckBox = ""
   return checkBoxDownloadDialog;
 }
 
-export { createCheckBoxDialog };
+export {createCheckBoxDialog};

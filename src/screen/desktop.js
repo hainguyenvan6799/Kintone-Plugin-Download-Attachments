@@ -1,28 +1,32 @@
-import { createDownloadAttachmentButton } from "Components/DownloadAttachmentButton";
-import { handleClickDownloadButton } from "Logics/actionsWhenClickDownload";
+import {createDownloadAttachmentButton} from 'Components/DownloadAttachmentButton';
+import {ManageClickDownload} from 'Logics';
 
 jQuery.noConflict();
 
-(function ($, PLUGIN_ID) {
-
-  kintone.events.on("app.record.index.show", function (event) {
-    var config = kintone.plugin.app.getConfig(PLUGIN_ID);
+(function($, PLUGIN_ID) {
+  kintone.events.on('app.record.index.show', (event) => {
+    const config = kintone.plugin.app.getConfig(PLUGIN_ID);
 
     const headerSpace = kintone.app.getHeaderMenuSpaceElement();
 
-    const downloadButton = createDownloadAttachmentButton();
+    const buttonDownload = createDownloadAttachmentButton();
 
-    downloadButton.addSubElementToElement(headerSpace);
+    buttonDownload.addSubElementToElement(headerSpace);
 
-    downloadButton
-      .getElement()
-      .addEventListener("click", () =>
-        handleClickDownloadButton(
-          config,
-          downloadButton,
-          headerSpace,
-          event.records
-        )
-      );
+    // downloadButton
+    //   .getElement()
+    //   .addEventListener("click", () =>
+    //     handleClickDownloadButton(
+    //       config,
+    //       downloadButton,
+    //       headerSpace,
+    //       event.records
+    //     )
+    //   );
+    buttonDownload.addGlobalEventListener(
+      'click',
+      () =>
+        new ManageClickDownload(config, headerSpace, buttonDownload, event.records)
+    );
   });
 })(jQuery, kintone.$PLUGIN_ID);

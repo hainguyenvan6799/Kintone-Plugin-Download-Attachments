@@ -1,11 +1,11 @@
-import { CustomLabel } from "Components/";
+import {CustomLabel} from 'Components/';
 
 function createHeaderLabel() {
   const headerLabel = new CustomLabel();
 
-  headerLabel.setInnerHTML("Bulk Download Attachments");
+  headerLabel.setInnerHTML('Bulk Download Attachments');
 
   return headerLabel;
 }
 
-export { createHeaderLabel };
+export {createHeaderLabel};

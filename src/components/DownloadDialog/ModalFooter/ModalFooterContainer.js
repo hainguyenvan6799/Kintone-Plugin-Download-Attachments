@@ -1,10 +1,10 @@
-import { CustomDiv } from "Components/";
+import {CustomDiv} from 'Components/';
 
 function createModalFooterContainer() {
   const modalFooterContainer = new CustomDiv();
 
   const modalFooterContainerAttributes = {
-    class: "modal-footer",
+    class: 'modal-footer',
   };
 
   modalFooterContainer.setAttribute(modalFooterContainerAttributes);
@@ -12,4 +12,4 @@ function createModalFooterContainer() {
   return modalFooterContainer;
 }
 
-export { createModalFooterContainer };
+export {createModalFooterContainer};

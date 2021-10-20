@@ -1,53 +1,28 @@
-function addDownloadedFileToFolderAndPackage(paramsObject) {
-  const { error, data, resolve, reject, zipTool, fileName, recordTitle } =
-    paramsObject;
-  if (error) {
-    reject(error);
-  }
-  let recordAttachments = zipTool.folder(recordTitle);
-  recordAttachments.file(`${Date.now()}_${fileName}`, data, { binary: true });
+function downloadFile(zipTool, fileDownload, indexOfFile) {
+  return new kintone.Promise((resolve, reject) => {
+    JSZipUtils.getBinaryContent(fileDownload.blobUrl, (error, data) => {
+      if (error) {
+        reject(error);
+      }
+      const recordAttachments = zipTool.folder(fileDownload.title);
+      // recordAttachments.file(`${Date.now() + indexOfFile}_${fileDownload.name}`, data, {
+      //   binary: true,
+      // });
+      recordAttachments.file(`${fileDownload.name}`, data, {
+        binary: true,
+      });
 
-  resolve(data);
-}
-
-function retrieveFilesDownloadFromUrls(
-  zipTool,
-  urlToDownload,
-  fileName,
-  recordTitle
-) {
-  return new kintone.Promise(function (resolve, reject) {
-    // getBinaryContent is an API that retrieves filesDownload from URLs asynchronously
-    JSZipUtils.getBinaryContent(urlToDownload, (error, data) =>
-      addDownloadedFileToFolderAndPackage({
-        error,
-        data,
-        resolve,
-        reject,
-        zipTool,
-        fileName,
-        recordTitle,
-      })
-    );
+      resolve(data);
+    });
   });
 }
 
-function downloadFiles(filesDownload, anotherZip, fileNum) {
-    let zipTool = anotherZip || new JSZip();
-    let indexOfFile = fileNum || 0;
+function downloadFiles(filesDownload, anotherZip) {
+  console.log("filesDownload: ", filesDownload)
+  const zipTool = anotherZip || new JSZip();
 
-    return retrieveFilesDownloadFromUrls(
-      zipTool,
-      filesDownload[indexOfFile]["blobUrl"],
-      filesDownload[indexOfFile]["name"],
-      filesDownload[indexOfFile]["title"]
-    ).then(function (data) {
-      indexOfFile++;
-      if (indexOfFile === filesDownload.length) {
-        return zipTool;
-      }
-      return downloadFiles(filesDownload, zipTool, indexOfFile);
-    });
+  return Promise.all(filesDownload.map((fileDownload, indexOfFile) => downloadFile(zipTool, fileDownload, indexOfFile)))
+    .then(response => zipTool);
 }
 
-export { downloadFiles };
+export {downloadFiles};

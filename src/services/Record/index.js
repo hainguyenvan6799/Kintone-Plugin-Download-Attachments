@@ -1,22 +1,42 @@
-function getAppRecords(fieldCode, isGuestSpace, listIds = null) {
-    let appId = kintone.app.getId();
-    let url = kintone.api.url("/k/v1/records", isGuestSpace);
+// function getAppRecords(fieldCode, isGuestSpace, listIds = null) {
+//   const appId = kintone.app.getId();
+//   const url = kintone.api.url('/k/v1/records', isGuestSpace);
 
-    let body = {
-      app: appId,
-      field: fieldCode,
-    };
+//   const body = {
+//     app: appId,
+//     field: fieldCode,
+//   };
 
-    if (listIds) {
-      let listIdsInString = listIds.toString();
-      body.query = `$id in (${listIdsInString})`;
-      console.log("listids: ", body.query);
-    } else {
-      let condition = kintone.app.getQueryCondition() || "";
-      let query = condition + "order by $id asc";
-      body.query = query;
-    }
-    return kintone.api(url, "GET", body);
+//   if (listIds) {
+//     const listIdsInString = listIds.toString();
+//     body.query = `$id in (${listIdsInString})`;
+//     console.log('listids: ', body.query);
+//   } else {
+//     const condition = kintone.app.getQueryCondition() || '';
+//     const query = condition + 'order by $id asc';
+//     body.query = query;
+//   }
+//   return kintone.api(url, 'GET', body);
+// }
+
+function getAppRecords(listIds = null) {
+  const appId = kintone.app.getId();
+  const url = kintone.api.url('/k/v1/records');
+
+  const body = {
+    app: appId,
+  };
+
+  if (listIds) {
+    const listIdsInString = listIds.toString();
+    body.query = `$id in (${listIdsInString})`;
+    console.log('listids: ', body.query);
+  } else {
+    const condition = kintone.app.getQueryCondition() || '';
+    const query = condition + 'order by $id asc';
+    body.query = query;
+  }
+  return kintone.api(url, 'GET', body);
 }
 
-export { getAppRecords };
+export {getAppRecords};

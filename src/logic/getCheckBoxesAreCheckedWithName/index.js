@@ -1,15 +1,9 @@
 function getCheckBoxesAreCheckedWithName(groupName) {
-  const arrayContainCheckBoxesAreChecked = [];
   const checkBoxesAreChecked = document.getElementsByName(groupName);
 
-  for (let i = 0; i < checkBoxesAreChecked.length; i++) {
-    if (checkBoxesAreChecked[i].checked) {
-      const valueCheckBoxInObject = JSON.parse(checkBoxesAreChecked[i].value);
+  return Array.from(checkBoxesAreChecked)
+    .filter((checkBoxAreChecked) => checkBoxAreChecked.checked)
+    .map((checkBoxAreChecked) => JSON.parse(checkBoxAreChecked.value));
 
-      arrayContainCheckBoxesAreChecked.push(valueCheckBoxInObject);
-    }
-  }
-
-  return arrayContainCheckBoxesAreChecked;
 }
-export { getCheckBoxesAreCheckedWithName };
+export {getCheckBoxesAreCheckedWithName};

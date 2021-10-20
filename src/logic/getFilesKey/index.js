@@ -1,45 +1,68 @@
 import { getSpecificFileKey } from "../getSpecificFileKey";
 
-function addRecordAttachmentsAndTitleToFileKeys(
-  recordAttachments,
-  fileKeys,
-  recordTitle
-) {
-  for (let j = 0; j < recordAttachments.value.length; j++) {
-    fileKeys.push({
-      ...recordAttachments.value[j],
-      title: recordTitle,
-    });
+// function getFileKeys(allRecords, fieldCode, listSelectedFileKey) {
+//   let fileKeys = [];
+
+//   fileKeys = allRecords.records
+//     .filter((record) => record[fieldCode].value.length > 0)
+//     .map((record) => {
+//       const recordAttachments = record[fieldCode].value;
+//       const recordTitle = record.Title
+//         ? record.Title.value
+//         : `Record ${record.Record_number.value}`;
+
+//       return recordAttachments.map((recordAttachment) => {
+//         return {
+//           ...recordAttachment,
+//           title: recordTitle,
+//         };
+//       });
+//     })
+//     .flat();
+
+//   if (listSelectedFileKey) {
+//     return getSpecificFileKey(fileKeys, listSelectedFileKey);
+//   }
+
+//   return fileKeys;
+// }
+
+function findAllValuesWithProp(object, keyName, arr = []) {
+  if (object[keyName]) {
+    arr.push(object);
   }
+  for (let property in object) {
+    object.hasOwnProperty(property) &&
+      typeof object[property] === "object" &&
+      findAllValuesWithProp(object[property], keyName, arr);
+  }
+  return arr;
 }
 
-function getRecordAttachmentsAndTitle(allRecords, fieldCode, i) {
-  const recordAttachments = allRecords.records[i][fieldCode];
-  const recordTitle = allRecords.records[i]["Title"]
-    ? allRecords.records[i]["Title"].value
-    : `Record ${allRecords.records[i]["Record_number"].value}`;
-  return { recordAttachments, recordTitle };
-}
+function getFileKeys(allRecords, listSelectedFileKey) {
+  let fileKeys = [];
 
-function getFileKeys(allRecords, fieldCode, listSelectedFileKey) {
-    let fileKeys = [];
-    for (let i = 0; i < allRecords.records.length; i++) {
-      const { recordAttachments, recordTitle } = getRecordAttachmentsAndTitle(
-        allRecords,
-        fieldCode,
-        i
-      );
-      // When multiple files are attached
-      addRecordAttachmentsAndTitleToFileKeys(
-        recordAttachments,
-        fileKeys,
-        recordTitle
-      );
-    }
-    if (listSelectedFileKey) {
-      return getSpecificFileKey(fileKeys, listSelectedFileKey);
-    }
-    return fileKeys;
+  fileKeys = allRecords.records
+    .map((record) => {
+      const recordAttachments = findAllValuesWithProp(record, "fileKey");
+
+      const recordTitle = record.Title
+        ? record.Title.value
+        : `Record ${record.Record_number.value}`;
+
+      return recordAttachments.map((recordAttachment) => {
+        return {
+          ...recordAttachment,
+          title: recordTitle,
+        };
+      });
+    })
+    .flat();
+
+  if (listSelectedFileKey) {
+    return getSpecificFileKey(fileKeys, listSelectedFileKey);
+  }
+  return fileKeys;
 }
 
 export { getFileKeys };

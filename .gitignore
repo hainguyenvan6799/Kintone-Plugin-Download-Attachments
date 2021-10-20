@@ -1,3 +1,5 @@
 node_modules/
 note.txt
-private.ppk
+build/
+dist/
+list_notes_bulk_download.txt

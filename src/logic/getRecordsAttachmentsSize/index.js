@@ -1,11 +1,11 @@
-import { convertKbToMb } from "Utilities/";
+import {convertKbToMb} from 'Utilities/';
 
 function getRecordAttachmentsSize(record) {
   let recordAttachmentsSizeInKb = 0;
-  record["Attachment"].value.map((item) => {
+  record.Attachment.value.map((item) => {
     recordAttachmentsSizeInKb += parseInt(item.size, 10);
   });
-  let recordAttachmentsSizeInMb = convertKbToMb(recordAttachmentsSizeInKb);
+  const recordAttachmentsSizeInMb = convertKbToMb(recordAttachmentsSizeInKb);
   return recordAttachmentsSizeInMb;
 }
 
@@ -18,4 +18,4 @@ function getRecordsAttachmentsSize(records) {
   return recordsAttachmentsSizeInMb;
 }
 
-export { getRecordsAttachmentsSize, getRecordAttachmentsSize };
+export {getRecordsAttachmentsSize, getRecordAttachmentsSize};

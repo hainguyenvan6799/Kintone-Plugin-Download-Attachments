@@ -1,28 +1,15 @@
-import { addFileURL } from "Services/";
+import {addFileURL} from 'Services/';
 
-function recursiveAddFileUrls(
-  fileKeys,
-  increasingKeyNum,
-  addfileURLs,
-  isGuestSpace
-) {
-  increasingKeyNum++;
-  if (increasingKeyNum === fileKeys.length) {
-    return fileKeys;
-  }
-  return addfileURLs(fileKeys, isGuestSpace, increasingKeyNum);
+// function addfileURLs(fileKeys, isGuestSpace) {
+//   return Promise.all(
+//     fileKeys.map((fileKey) => addFileURL(fileKey, isGuestSpace))
+//   );
+// }
+
+function addfileURLs(fileKeys) {
+  return Promise.all(
+    fileKeys.map((fileKey) => addFileURL(fileKey))
+  );
 }
 
-function addfileURLs(fileKeys, isGuestSpace, keyNum) {
-    let increasingKeyNum = keyNum || 0;
-    return addFileURL(fileKeys[increasingKeyNum], isGuestSpace).then(() =>
-      recursiveAddFileUrls(
-        fileKeys,
-        increasingKeyNum,
-        addfileURLs,
-        isGuestSpace
-      )
-    );
-}
-
-export { addfileURLs };
+export {addfileURLs};

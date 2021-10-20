@@ -1,13 +1,13 @@
-import { CustomDiv } from "Components/";
+import {CustomDiv} from 'Components/';
 
 function createModalContent() {
   const modalContent = new CustomDiv();
   const modalContentAttributes = {
-    class: "modal-content",
+    class: 'modal-content',
   };
   modalContent.setAttribute(modalContentAttributes);
 
   return modalContent;
 }
 
-export { createModalContent };
+export {createModalContent};

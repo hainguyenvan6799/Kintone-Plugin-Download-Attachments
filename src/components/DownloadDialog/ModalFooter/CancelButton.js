@@ -1,17 +1,17 @@
-import { CustomButton } from "Components/";
+import {CustomButton} from 'Components/';
 
-function createCancelButton () {
-    const cancelButton = new CustomButton("CANCEL");
+function createCancelButton() {
+  const cancelButton = new CustomButton('CANCEL');
 
-    const cancelButtonAttributes = {
-        type: "button",
-        class: "btn btn-danger",
-        "data-dismiss": "modal"
-    }
+  const cancelButtonAttributes = {
+    type: 'button',
+    class: 'btn btn-danger',
+    'data-dismiss': 'modal'
+  };
 
-    cancelButton.setAttribute(cancelButtonAttributes);
+  cancelButton.setAttribute(cancelButtonAttributes);
 
-    return cancelButton;
+  return cancelButton;
 }
 
-export { createCancelButton };
+export {createCancelButton};

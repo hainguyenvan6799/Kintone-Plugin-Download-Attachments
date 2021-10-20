@@ -17,52 +17,88 @@ import { getAppRecords } from "Services";
 import {
   doZipFile,
   saveZipFile,
-  disableButton,
   resetDisableButton,
 } from "Utilities";
-import { updateToSpinnerButton } from "Components/SpinnerButton";
+import { ButtonSpinner } from "Components/ButtonSpinner";
 
-function handleDownloadAttachments(config, listIds = null, listSelectedFileKey = null) {
+function handleAfterDownloadSuccess() {
+  let successMessage = new Notification({
+    text: "Download Completed.",
+    type: "success",
+    className: "options-class",
+  });
+  successMessage.open();
+
+  const isDoneDownload = true;
+  return { isDoneDownload, successMessage };
+}
+
+function handleDownloadFail(error) {
+  let errorMessage;
+  if (error?.type === "logic") {
+    errorMessage = new Notification({
+      text: error.message,
+      type: "danger",
+      className: "options-class",
+    });
+  } else {
+    errorMessage = new Notification({
+      text: "Errors occur during download.",
+      type: "danger",
+      className: "options-class",
+    });
+  }
+  errorMessage.open();
+  const isDoneDownload = true;
+
+  return { isDoneDownload, errorMessage };
+}
+
+function closeAllNotifications(timeInMillisecons, notificationArray = []) {
+  if (notificationArray.length > 0) {
+    setTimeout(() => {
+      notificationArray.forEach((notification) => notification?.close());
+    }, timeInMillisecons);
+  }
+}
+
+function downloadAttachments(
+  config,
+  listIds = null,
+  listSelectedFileKey = null
+) {
   const fieldCode = "Attachment";
   const isGuestSpace = false;
+  let successMessage, errorMessage;
+  const TIME_TO_CLOSE_NOTIFICATION = 5000;
 
   return getAppRecords(fieldCode, isGuestSpace, listIds)
-    .then((allRecords) => getFileKeys(allRecords, fieldCode, listSelectedFileKey))
+    .then((allRecords) =>
+      getFileKeys(allRecords, fieldCode, listSelectedFileKey)
+    )
     .then((fileKeys) => checkFileSize(fileKeys, config.sizeLimit))
     .then((fileKeys) => addfileURLs(fileKeys, isGuestSpace))
     .then(downloadFiles)
     .then(doZipFile)
     .then(saveZipFile)
     .then((response) => {
-      const successMessage = new Notification({
-        text: "Download Completed.",
-        type: "success",
-        className: "options-class",
-      });
-      successMessage.open();
-
-      const isDoneDownload = true;
+      const { isDoneDownload, successMessage: successMessageAfterDownload } =
+        handleAfterDownloadSuccess();
+      successMessage = successMessageAfterDownload;
       return isDoneDownload;
     })
     .catch(function (error) {
-      let errorMessage;
-      if(error?.type === "logic") {
-        errorMessage = new Notification({
-          text: error.message,
-          type: "danger",
-          className: "options-class",
-        });
-      } else {
-        errorMessage = new Notification({
-          text: "Errors occur during download.",
-          type: "danger",
-          className: "options-class",
-        });
-      }
-      errorMessage.open();
-      const isDoneDownload = true;
+      const { isDoneDownload, errorMessage: errorDownloadMessage } =
+        handleDownloadFail(error);
+      errorMessage = errorDownloadMessage;
       return isDoneDownload;
-    });
+    })
+    .finally(() =>
+      closeAllNotifications(TIME_TO_CLOSE_NOTIFICATION, [
+        successMessage,
+        errorMessage,
+      ])
+    );
 }
 
 function initialDownloadDialogWithSelectAll({
@@ -83,7 +119,7 @@ function initialDownloadDialogWithSelectAll({
   return totalSize;
 }
 
-function handleWhenClickDownloadButtonInsideDialog(
+function handleClickDownloadInDialog(
   pluginConfig,
   downloadButtonInsideDialog,
   cancelButton
@@ -94,13 +130,14 @@ function handleWhenClickDownloadButtonInsideDialog(
     (checkBox) => checkBox.recordId
   );
 
-  const { updatedButton, loadingSpinner } = updateToSpinnerButton(
+  const { updatedButton, loadingSpinner } = ButtonSpinner(
     downloadButtonInsideDialog
   );
 
-  disableButton(cancelButton);
+  // Todo: check if error: disableButton(cancelButton);
+  cancelButton.disable();
 
-  handleDownloadAttachments(pluginConfig, listIdsCheckBoxesAreChecked).then(
+  downloadAttachments(pluginConfig, listIdsCheckBoxesAreChecked).then(
     (isDone) => {
       if (isDone) {
         resetDownloadButton(updatedButton, loadingSpinner);
@@ -174,11 +211,7 @@ function handleWhenClickCancelButton(headerSpace) {
   headerSpace.removeChild(headerSpace.lastElementChild);
 }
 
-function handleIfEnableSelectedRecord(
-  pluginConfig,
-  headerSpace,
-  recordsIndexView
-) {
+function showSelectDownloadDialog(pluginConfig, headerSpace, recordsIndexView) {
   let totalSize = 0;
 
   const recordsHaveAttachments = recordsIndexView.filter(
@@ -206,17 +239,15 @@ function handleIfEnableSelectedRecord(
     elementDisplayTotalSize,
   });
 
-  downloadButtonInsideDialog
-    .getElement()
-    .addEventListener("click", () =>
-      handleWhenClickDownloadButtonInsideDialog(
-        pluginConfig,
-        downloadButtonInsideDialog,
-        cancelButton
-      )
-    );
+  downloadButtonInsideDialog.addGlobalEventListener("click", () =>
+    handleClickDownloadInDialog(
+      pluginConfig,
+      downloadButtonInsideDialog,
+      cancelButton
+    )
+  );
 
-  selectAllCheckBox.getElement().addEventListener("change", () => {
+  selectAllCheckBox.addGlobalEventListener("change", () => {
     totalSize = handleWhenChangeSelectAllCheckBox(
       pluginConfig,
       selectAllCheckBox,
@@ -226,7 +257,7 @@ function handleIfEnableSelectedRecord(
     );
   });
 
-  contentRowTwoOfModalBody.getElement().addEventListener("change", (event) => {
+  contentRowTwoOfModalBody.addGlobalEventListener("change", (event) => {
     totalSize = handleWhenChangeSelectRecordCheckBox(
       event,
       pluginConfig,
@@ -236,24 +267,22 @@ function handleIfEnableSelectedRecord(
     );
   });
 
-  fullScreenButton
-    .getElement()
-    .addEventListener("click", () =>
-      handleWhenClickFullScreenIcon(modalDialog)
-    );
+  fullScreenButton.addGlobalEventListener("click", () =>
+    handleWhenClickFullScreenIcon(modalDialog)
+  );
 
-  cancelButton
-    .getElement()
-    .addEventListener("click", () => handleWhenClickCancelButton(headerSpace));
+  cancelButton.addGlobalEventListener("click", () =>
+    handleWhenClickCancelButton(headerSpace)
+  );
 
   downloadModal.addSubElementToElement(headerSpace);
 }
 
-function handleIfDontEnaleSelectRecord(pluginConfig, downloadButton) {
+function downloadNow(pluginConfig, downloadButton) {
   const { updatedButton, loadingSpinner } =
-    updateToSpinnerButton(downloadButton);
+    ButtonSpinner(downloadButton);
 
-  handleDownloadAttachments(pluginConfig).then((isDone) => {
+  downloadAttachments(pluginConfig).then((isDone) => {
     if (isDone) {
       resetDownloadButton(updatedButton, loadingSpinner);
     }
@@ -266,10 +295,10 @@ function handleClickDownloadButton(
   headerSpace,
   recordsIndexView
 ) {
-  if (pluginConfig.isEnableSelectRecordForAttachmentDownload === "yes") {
-    handleIfEnableSelectedRecord(pluginConfig, headerSpace, recordsIndexView);
+  if (pluginConfig.activeAttachmentsSelection === "yes") {
+    showSelectDownloadDialog(pluginConfig, headerSpace, recordsIndexView);
   } else {
-    handleIfDontEnaleSelectRecord(pluginConfig, downloadButton);
+    downloadNow(pluginConfig, downloadButton);
   }
 }
 

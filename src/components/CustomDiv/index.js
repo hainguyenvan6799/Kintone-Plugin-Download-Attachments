@@ -1,7 +1,7 @@
-import BasicElement from "../BasicElement";
+import BasicElement from '../BasicElement';
 
 export class CustomDiv extends BasicElement {
   constructor(textDisplay) {
-    super("div", textDisplay);
+    super('div', textDisplay);
   }
 }

@@ -1,7 +1,7 @@
-import { createFullScreenButton } from "./FullScreenButton";
-import { createModalHeaderContainer } from "./ModalHeaderContainer";
-import { createHeaderLabel } from "./HeaderLabel";
-import { addElementsToParentContainer } from "Utilities/";
+import {createFullScreenButton} from './FullScreenButton';
+import {createModalHeaderContainer} from './ModalHeaderContainer';
+import {createHeaderLabel} from './HeaderLabel';
+import {addElementsToParentContainer} from 'Utilities/';
 
 function createModalHeader() {
   const headerLabel = createHeaderLabel();
@@ -13,4 +13,4 @@ function createModalHeader() {
   return {modalHeaderContainer, fullScreenButton};
 }
 
-export { createModalHeader };
+export {createModalHeader};

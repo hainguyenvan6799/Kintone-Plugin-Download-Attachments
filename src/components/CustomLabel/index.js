@@ -1,11 +1,11 @@
-import BasicElement from "Components/BasicElement";
+import BasicElement from 'Components/BasicElement';
 
 export class CustomLabel extends BasicElement {
   constructor(textDisplay) {
-    super("label", textDisplay);
+    super('label', textDisplay);
   }
 
-  updateInfoLabel(textDisplay = "", labelFor = "") {
+  updateInfoLabel(textDisplay = '', labelFor = '') {
     this.setInnerHTML(textDisplay);
     this.setAttribute({
       htmlFor: labelFor,

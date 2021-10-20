@@ -1,10 +1,10 @@
-import { CustomDiv } from "Components/";
+import {CustomDiv} from 'Components/';
 
 function createModalHeaderContainer() {
   const modalHeaderContainer = new CustomDiv();
 
   const modalHeaderContainerAttributes = {
-    class: "modal-header",
+    class: 'modal-header',
   };
 
   modalHeaderContainer.setAttribute(modalHeaderContainerAttributes);
@@ -12,4 +12,4 @@ function createModalHeaderContainer() {
   return modalHeaderContainer;
 }
 
-export { createModalHeaderContainer };
+export {createModalHeaderContainer};

@@ -1,11 +1,11 @@
-import { CustomLabel } from "Components";
+import {CustomLabel} from 'Components';
 
-function createLabelCheckBoxDialog(labelFor = "") {
+function createLabelCheckBoxDialog(labelFor = '') {
   const labelObject = new CustomLabel();
 
   const labelObjectAttributes = {
     htmlFor: labelFor,
-    class: "form-check-label"
+    class: 'form-check-label'
   };
 
   labelObject.setAttribute(labelObjectAttributes);
@@ -13,4 +13,4 @@ function createLabelCheckBoxDialog(labelFor = "") {
   return labelObject;
 }
 
-export { createLabelCheckBoxDialog };
+export {createLabelCheckBoxDialog};

@@ -1,10 +1,10 @@
-import BasicElement from "Components/BasicElement";
+import BasicElement from 'Components/BasicElement';
 
 function createFullScreenButton() {
-  const fullScreenButton = new BasicElement("i");
+  const fullScreenButton = new BasicElement('i');
 
   const fullScreenAttributes = {
-    class: "bi bi-arrows-fullscreen float-right",
+    class: 'bi bi-arrows-fullscreen float-right',
   };
 
   fullScreenButton.setAttribute(fullScreenAttributes);
@@ -12,4 +12,4 @@ function createFullScreenButton() {
   return fullScreenButton;
 }
 
-export { createFullScreenButton };
+export {createFullScreenButton};

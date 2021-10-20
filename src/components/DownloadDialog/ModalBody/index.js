@@ -1,16 +1,16 @@
-import { CustomDiv } from "Components/";
-import { addElementsToParentContainer } from "Utilities/";
+import {CustomDiv} from 'Components/';
+import {addElementsToParentContainer} from 'Utilities/';
 import {
   createNotifyEstimatedFileSize,
   createSelectAllCheckBox,
-} from "./ContentRowOneModalBody";
-import { createRecordsCheckBox } from "./ContentRowTwoModalBody";
-import { createModalBodyContainer } from "./ModalBodyContainer";
+} from './ContentRowOneModalBody';
+import {createRecordsCheckBox} from './ContentRowTwoModalBody';
+import {createModalBodyContainer} from './ModalBodyContainer';
 
 function createRowOneOfModalBodyContainer() {
   const rowOne = new CustomDiv();
   const rowOneAttributes = {
-    class: "row",
+    class: 'row',
   };
   rowOne.setAttribute(rowOneAttributes);
 
@@ -37,13 +37,13 @@ function addRowOneToModalBodyContainer(
   ]);
   addElementsToParentContainer(modalBodyContainer, [rowOneOfModalBody]);
 
-  return { selectAllCheckBox, spanForCurrentTotalSize };
+  return {selectAllCheckBox, spanForCurrentTotalSize};
 }
 
 function createRowTwoOfModalBodyContainer() {
   const rowTwo = new CustomDiv();
   const rowTwoAttributes = {
-    class: "container",
+    class: 'container',
   };
   rowTwo.setAttribute(rowTwoAttributes);
   return rowTwo;
@@ -56,16 +56,16 @@ function addRowTwoToModalBodyContainer(records, modalBodyContainer) {
   addElementsToParentContainer(rowTwoOfModalBody, [contentRowTwo]);
   addElementsToParentContainer(modalBodyContainer, [rowTwoOfModalBody]);
 
-  return { contentRowTwo };
+  return {contentRowTwo};
 }
 
 function createModalBody(records, sizeLimitCanDownload) {
   const modalBodyContainer = createModalBodyContainer();
 
-  const { selectAllCheckBox, spanForCurrentTotalSize } =
+  const {selectAllCheckBox, spanForCurrentTotalSize} =
     addRowOneToModalBodyContainer(sizeLimitCanDownload, modalBodyContainer);
 
-  const { contentRowTwo } = addRowTwoToModalBodyContainer(
+  const {contentRowTwo} = addRowTwoToModalBodyContainer(
     records,
     modalBodyContainer
   );
@@ -78,4 +78,4 @@ function createModalBody(records, sizeLimitCanDownload) {
   };
 }
 
-export { createModalBody };
+export {createModalBody};

@@ -1,11 +1,11 @@
-import { CustomDiv } from "Components";
-import { addElementsToParentContainer } from "Utilities";
-import { createCheckBoxDialog, createContainerCheckBoxAndLabel, createLabelCheckBoxDialog } from "../CheckBoxAndLabel";
+import {CustomDiv} from 'Components';
+import {addElementsToParentContainer} from 'Utilities';
+import {createCheckBoxDialog, createContainerCheckBoxAndLabel, createLabelCheckBoxDialog} from '../CheckBoxAndLabel';
 
 function createColumnContainSelectAllCheckBox() {
   const columnContainSelectAllCheckBox = new CustomDiv();
   const columnContainSelectAllCheckBoxAttributes = {
-    class: "col-5",
+    class: 'col-5',
   };
   columnContainSelectAllCheckBox.setAttribute(
     columnContainSelectAllCheckBoxAttributes
@@ -15,32 +15,32 @@ function createColumnContainSelectAllCheckBox() {
 }
 
 function createContentSelectAllCheckBoxAndLabelContainer() {
-  const selectAllCheckBox = createCheckBoxDialog("selectAll", "selectAll");
-  const labelForSelectAllCheckBox = createLabelCheckBoxDialog("selectAll");
+  const selectAllCheckBox = createCheckBoxDialog('selectAll', 'selectAll');
+  const labelForSelectAllCheckBox = createLabelCheckBoxDialog('selectAll');
 
   const containerSelectAllCheckBoxAndLabel = createContainerCheckBoxAndLabel(
     selectAllCheckBox,
     labelForSelectAllCheckBox,
-    "Select all records"
+    'Select all records'
   );
 
-  return {containerSelectAllCheckBoxAndLabel, selectAllCheckBox}
+  return {containerSelectAllCheckBoxAndLabel, selectAllCheckBox};
 }
 
 function addContentToColumnContainSelectAllCheckBox(columnContainSelectAllCheckBox) {
   const {containerSelectAllCheckBoxAndLabel, selectAllCheckBox} = createContentSelectAllCheckBoxAndLabelContainer();
-  addElementsToParentContainer(columnContainSelectAllCheckBox, [containerSelectAllCheckBoxAndLabel])
+  addElementsToParentContainer(columnContainSelectAllCheckBox, [containerSelectAllCheckBoxAndLabel]);
 
-  return {selectAllCheckBox}
+  return {selectAllCheckBox};
 }
 
 function createSelectAllCheckBox() {
-  
+
   const columnContainSelectAllCheckBox = createColumnContainSelectAllCheckBox();
-  
-  const {selectAllCheckBox} = addContentToColumnContainSelectAllCheckBox(columnContainSelectAllCheckBox)
-  
+
+  const {selectAllCheckBox} = addContentToColumnContainSelectAllCheckBox(columnContainSelectAllCheckBox);
+
   return {columnContainSelectAllCheckBox, selectAllCheckBox};
 }
 
-export { createSelectAllCheckBox };
+export {createSelectAllCheckBox};

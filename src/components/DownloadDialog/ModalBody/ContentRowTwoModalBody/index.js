@@ -1,1 +1,1 @@
-export * from "./Content_RecordsCheckBox"
+export * from './Content_RecordsCheckBox';

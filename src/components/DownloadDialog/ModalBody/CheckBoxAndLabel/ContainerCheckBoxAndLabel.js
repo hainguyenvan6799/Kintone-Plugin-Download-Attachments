@@ -1,4 +1,6 @@
-import { CustomDiv } from "Components";
+import {CustomDiv} from 'Components';
+
+// import { addElementsToParentContainer } from "Utilities";
 
 function addSubElementsForContainerLabelAndCheckBox(containerLabelAndCheckBox, checkBox, labelOfCheckBox, textDisplay) {
   checkBox.addSubElementToElement(labelOfCheckBox.getElement());
@@ -10,14 +12,40 @@ function createContainerCheckBoxAndLabel(checkBox, labelOfCheckBox, textDisplay)
   const containerLabelAndCheckBox = new CustomDiv();
 
   const containerLabelAndCheckBoxAttributes = {
-    class: "form-check"
-  }
+    class: 'form-check'
+  };
 
-  containerLabelAndCheckBox.setAttribute(containerLabelAndCheckBoxAttributes)
+  containerLabelAndCheckBox.setAttribute(containerLabelAndCheckBoxAttributes);
 
-  addSubElementsForContainerLabelAndCheckBox(containerLabelAndCheckBox, checkBox, labelOfCheckBox, textDisplay)
+  addSubElementsForContainerLabelAndCheckBox(containerLabelAndCheckBox, checkBox, labelOfCheckBox, textDisplay);
 
   return containerLabelAndCheckBox;
 }
 
-export { createContainerCheckBoxAndLabel };
+export {createContainerCheckBoxAndLabel};
+
+// class ContainerCheckBox {
+//   constructor(checkBox, labelCheckBox, textDisplay) {
+//     this.checkBox = checkBox;
+//     this.labelCheckBox = labelCheckBox;
+//     this.textDisplay = textDisplay;
+//   }
+
+//   createContainerCheckBox() {
+//     const containerCheckBox = new CustomDiv();
+//     const containerCheckBoxAttributes = {
+//       class: "form-check",
+//     };
+//     containerCheckBox.setAttribute(containerCheckBoxAttributes);
+//     this.containerCheckBox = containerCheckBox;
+//     this.addSubElements();
+//   }
+
+//   addSubElements() {
+//     addElementsToParentContainer(this.labelCheckBox, [this.checkBox]);
+//     this.labelCheckBox.appendTextNode(this.textDisplay);
+//     addElementsToParentContainer(this.containerCheckBox, [this.labelCheckBox]);
+//   }
+// }
+
+// export { ContainerCheckBox };

@@ -1,7 +1,7 @@
-import { checkValueExistInArray } from "Utilities"
+import {checkValueExistInArray} from 'Utilities';
 
 function getSpecificFileKey(fileKeys, listSelectedFileKey) {
-    return fileKeys.filter(fileKey => checkValueExistInArray(fileKey.fileKey, listSelectedFileKey));
+  return fileKeys.filter(fileKey => checkValueExistInArray(fileKey.fileKey, listSelectedFileKey));
 }
 
-export {getSpecificFileKey}
+export {getSpecificFileKey};

@@ -1,17 +1,14 @@
-function checkedAllCheckBoxWithName(element, groupName) {
-  const arrayContainCheckBoxesAreChecked = [];
-  console.log(element.checked);
+function checkedAllCheckBoxWithName(selectAllElement, groupName) {
   const subCheckBoxes = document.getElementsByName(groupName);
 
-  for (let i = 0; i < subCheckBoxes.length; i++) {
-    subCheckBoxes[i].checked = element.checked;
-
-    if (subCheckBoxes[i].checked) {
-      const valueOfSubCheckBox = JSON.parse(subCheckBoxes[i].value);
-      arrayContainCheckBoxesAreChecked.push(valueOfSubCheckBox);
-    }
-  }
-  return arrayContainCheckBoxesAreChecked;
+  return Array.from(subCheckBoxes)
+    .map((subCheckBox) => {
+      subCheckBox.checked = selectAllElement.checked;
+      const valueOfSubCheckBox =
+        subCheckBox.checked && JSON.parse(subCheckBox.value);
+      return valueOfSubCheckBox;
+    })
+    .filter((valueOfSubCheckBox) => valueOfSubCheckBox);
 }
 
-export { checkedAllCheckBoxWithName };
+export {checkedAllCheckBoxWithName};

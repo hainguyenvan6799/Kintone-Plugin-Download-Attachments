@@ -1,20 +1,20 @@
-import { CustomButton } from "Components/";
+import {CustomButton} from 'Components/';
 
-function handleClickDownloadButton (downloadButton) {
+function handleClickDownloadButton(downloadButton) {
 
 }
 
-function createDownloadButton () {
-    const downloadButton = new CustomButton("DOWNLOAD");
+function createDownloadButton() {
+  const downloadButton = new CustomButton('DOWNLOAD');
 
-    const downloadButtonAttributes = {
-        type: "button",
-        class: "btn btn-primary"
-    }
+  const downloadButtonAttributes = {
+    type: 'button',
+    class: 'btn btn-primary'
+  };
 
-    downloadButton.setAttribute(downloadButtonAttributes);
+  downloadButton.setAttribute(downloadButtonAttributes);
 
-    return downloadButton;
+  return downloadButton;
 }
 
-export { createDownloadButton };
+export {createDownloadButton};
