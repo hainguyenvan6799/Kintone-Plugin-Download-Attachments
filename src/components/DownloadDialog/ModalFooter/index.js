@@ -1,16 +1,16 @@
 import {addElementsToParentContainer} from '../../../utils';
-import {createCancelButton} from './CancelButton';
-import {createDownloadButton} from './DownloadButton';
+import {createButtonCancel} from './ButtonCancel';
+import {createButtonDownload} from './ButtonDownload';
 import {createModalFooterContainer} from './ModalFooterContainer';
 
 function createModalFooter() {
-  const cancelButton = createCancelButton();
-  const downloadButton = createDownloadButton();
+  const buttonCancel = createButtonCancel();
+  const buttonDownload = createButtonDownload();
   const modalFooterContainer = createModalFooterContainer();
 
-  addElementsToParentContainer(modalFooterContainer, [cancelButton, downloadButton]);
+  addElementsToParentContainer(modalFooterContainer, [buttonCancel, buttonDownload]);
 
-  return {modalFooterContainer, cancelButton, downloadButton};
+  return {modalFooterContainer, buttonCancel, buttonDownload};
 }
 
 export {createModalFooter};

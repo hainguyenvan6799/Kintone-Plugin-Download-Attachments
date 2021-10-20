@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "node scripts/npm-start.js",
-    "upload": "kintone-plugin-uploader dist/plugin.zip --watch --waiting-dialog-ms 3000",
+    "upload": "kintone-plugin-uploader --base-url https://hainguyenvan.kintone.com --username hainguyenvan6799.webdev@gmail.com --password Thu01679343794 dist/plugin.zip --watch --waiting-dialog-ms 3000",
     "develop": "npm run build -- --watch",
     "build": "kintone-plugin-packer --ppk private.ppk --out dist/plugin.zip ./",
     "lint": "eslint src",

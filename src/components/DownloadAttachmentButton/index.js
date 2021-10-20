@@ -1,16 +1,16 @@
 import {CustomButton} from '..';
 
 function createDownloadAttachmentButton() {
-  const downloadButton = new CustomButton('Download Attachments');
-  const downloadButtonAttributes = {
+  const buttonDownload = new CustomButton('Download Attachments');
+  const buttonDownloadAttributes = {
     type: 'button',
     class: 'btn btn-primary',
     'data-toggle': 'modal',
     'data-target': '.bd-download-attachment-modal-lg',
   };
-  downloadButton.setAttribute(downloadButtonAttributes);
+  buttonDownload.setAttribute(buttonDownloadAttributes);
 
-  return downloadButton;
+  return buttonDownload;
 }
 
 export {createDownloadAttachmentButton};

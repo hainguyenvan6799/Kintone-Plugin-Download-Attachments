@@ -87,7 +87,7 @@ class ManageDialogDownload {
     });
   }
 
-  handleWhenClickCancelButton() {
+  handleWhenClickButtonCancel() {
     this.manageClickDownload.headerSpace.removeChild(
       this.manageClickDownload.headerSpace.lastElementChild
     );
@@ -111,7 +111,7 @@ class ManageDialogDownload {
     );
 
     this.buttonCancel.addGlobalEventListener("click", () =>
-      this.handleWhenClickCancelButton()
+      this.handleWhenClickButtonCancel()
     );
   }
 
@@ -127,9 +127,9 @@ class ManageDialogDownload {
     this.recordsHaveAttachments = recordsHaveAttachments;
     this.modalDownload = dialogElements.downloadModal || null || null;
     this.modalDialog = dialogElements.modalDialog || null;
-    this.buttonDownloadInDialog = dialogElements.downloadButton || null;
-    this.buttonCancel = dialogElements.cancelButton || null;
-    this.buttonFullScreen = dialogElements.fullScreenButton || null;
+    this.buttonDownloadInDialog = dialogElements.buttonDownload || null;
+    this.buttonCancel = dialogElements.buttonCancel || null;
+    this.buttonFullScreen = dialogElements.buttonFullScreen || null;
     this.checkboxSelectAll = dialogElements.selectAllCheckBox || null;
     this.elementDisplayTotalSize =
       dialogElements.spanForCurrentTotalSize || null;

@@ -28,7 +28,7 @@ import { getSpecificFileKey } from "../getSpecificFileKey";
 // }
 
 function findAllValuesWithProp(object, keyName, arr = []) {
-  if (object[keyName]) {
+  if (object && object[keyName]) {
     arr.push(object);
   }
   for (let property in object) {
