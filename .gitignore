@@ -1,0 +1,5 @@
+node_modules/
+note.txt
+build/
+dist/
+list_notes_bulk_download.txt
