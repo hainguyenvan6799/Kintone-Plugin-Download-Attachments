@@ -5,6 +5,7 @@ import {getAppRecords} from 'Services';
 import {doZipFile, saveZipFile} from 'Utilities';
 import { setNewFileName } from '../setNewFileName';
 import ManageDialogDownload from './manageDialogDownload';
+import {USER_LANGUAGE, ERROR, MESSAGE} from "Languages"
 
 class ManageClickDownload {
   constructor(pluginConfig, headerSpace, buttonDownload, recordsArray) {
@@ -23,7 +24,7 @@ class ManageClickDownload {
 
   handleAfterDownloadSuccess() {
     this.successMessage = new Notification({
-      text: 'Download Completed.',
+      text: MESSAGE.DOWNLOAD_COMPLETED[USER_LANGUAGE],
       type: 'success',
       className: 'options-class',
     });
@@ -46,8 +47,7 @@ class ManageClickDownload {
   }
 
   handleDownloadFail(error) {
-    const errorMessage = error.message ? error.message : error;
-    // 'Errors occur during download.'
+    const errorMessage = error.message ? ERROR.ERROR_DURING_DOWNLOAD[USER_LANGUAGE]  : error;
 
     this.errorMessage = new Notification({
       text: errorMessage,
