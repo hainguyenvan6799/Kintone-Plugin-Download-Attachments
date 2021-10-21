@@ -1,3 +1,4 @@
+// set new file name with suffix
 function setNewFileName(fileKeys, propertyToCheck = 'name') {
   const fileNames = [];
   let newValues = [];

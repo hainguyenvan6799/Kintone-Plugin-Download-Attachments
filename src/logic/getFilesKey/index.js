@@ -1,6 +1,7 @@
 import {getSpecificFileKey} from '../getSpecificFileKey';
 import {setNewFileName} from '../setNewFileName';
 
+// get object has "fikeKey"
 function findAllValuesWithProp(object, keyName, arr = []) {
   if (object && object[keyName]) {
     arr.push(object);
