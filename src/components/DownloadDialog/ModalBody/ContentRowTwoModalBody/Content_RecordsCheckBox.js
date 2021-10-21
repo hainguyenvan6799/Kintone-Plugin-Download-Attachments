@@ -48,6 +48,9 @@ function createRecordsCheckBox(records) {
     const containerRecordCheckBoxAndLabel = createRecordCheckBox(record);
 
     addElementsToParentContainer(containerRecordsCheckBox, [containerRecordCheckBoxAndLabel]);
+
+    // todo: check
+    return record;
   });
 
   return containerRecordsCheckBox;

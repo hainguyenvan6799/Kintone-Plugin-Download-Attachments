@@ -12,7 +12,12 @@ function createDownloadAttachmentDialog(records, sizeLimitCanDownload) {
   const modalContent = createModalContent();
   const {modalHeaderContainer: modalHeader, buttonFullScreen} =
     createModalHeader();
-  const {modalBodyContainer: modalBody, spanForCurrentTotalSize, selectAllCheckBox, contentRowTwo: contentRowTwoOfModalBody} = createModalBody(records, sizeLimitCanDownload);
+  const {
+    modalBodyContainer: modalBody,
+    spanForCurrentTotalSize,
+    selectAllCheckBox,
+    contentRowTwo: contentRowTwoOfModalBody
+  } = createModalBody(records, sizeLimitCanDownload);
   const {
     modalFooterContainer: modalFooter,
     buttonCancel,
@@ -32,7 +37,16 @@ function createDownloadAttachmentDialog(records, sizeLimitCanDownload) {
   addElementsToParentContainer(downloadModal, [modalDialog]);
   // modalDialog.addSubElementToElement(downloadModal.getElement());
 
-  return {downloadModal, modalDialog, contentRowTwoOfModalBody, buttonFullScreen, buttonCancel, buttonDownload, spanForCurrentTotalSize, selectAllCheckBox};
+  return {
+    downloadModal,
+    modalDialog,
+    contentRowTwoOfModalBody,
+    buttonFullScreen,
+    buttonCancel,
+    buttonDownload,
+    spanForCurrentTotalSize,
+    selectAllCheckBox
+  };
 }
 
 export {createDownloadAttachmentDialog};

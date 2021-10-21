@@ -18,7 +18,7 @@ function downloadFile(zipTool, fileDownload, indexOfFile) {
 }
 
 function downloadFiles(filesDownload, anotherZip) {
-  console.log("filesDownload: ", filesDownload)
+  console.log('filesDownload: ', filesDownload);
   const zipTool = anotherZip || new JSZip();
 
   return Promise.all(filesDownload.map((fileDownload, indexOfFile) => downloadFile(zipTool, fileDownload, indexOfFile)))

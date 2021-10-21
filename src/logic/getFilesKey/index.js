@@ -8,7 +8,7 @@ function findAllValuesWithProp(object, keyName, arr = []) {
   }
 
   for (const property in object) {
-    object.hasOwnProperty(property) &&
+    Object.prototype.hasOwnProperty.call(object, property) &&
       typeof object[property] === 'object' &&
       findAllValuesWithProp(object[property], keyName, arr);
   }
