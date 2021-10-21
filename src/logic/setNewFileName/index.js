@@ -1,24 +1,34 @@
-function setNewFileName(arrayObject, propertyToCheck) {
-	const fileNames = [];
-	const newValues = arrayObject.map(value => {
-		let [fileName, fileExtension] = value[propertyToCheck].split(".");
-		let newFileName = generateNewFileName(fileName, fileNames)
-		fileNames.push(newFileName);
+function setNewFileName(fileKeys, propertyToCheck = 'name') {
+  const fileNames = [];
+  let newValues = [];
 
-		return {
-			...value,
-			name: newFileName + "." + fileExtension
-		};
-	});
-	return newValues;
+  if (fileKeys && propertyToCheck) {
+    newValues = fileKeys.map(fileItem => {
+      const [fileName, fileExtension] = fileItem[propertyToCheck].split('.');
+
+      if (fileName && fileExtension) {
+        const newFileName = generateNewFileName(fileName, fileNames);
+        fileNames.push(newFileName);
+
+        return {
+          ...fileItem,
+          name: newFileName + '.' + fileExtension
+        };
+      }
+      return fileItem;
+    });
+  }
+
+  return newValues;
 }
 
-function generateNewFileName(fileName, result) {
-	let newFileName = fileName, suffix = 1;
-		while (result.indexOf(newFileName) >= 0) {
-			newFileName = `${fileName}(${suffix++})`;
-		}
-		return newFileName;
+function generateNewFileName(fileName, fileNames = []) {
+  let newFileName = fileName,
+    suffix = 1;
+  while (fileNames.indexOf(newFileName) !== -1) {
+    newFileName = `${fileName}(${suffix++})`;
+  }
+  return newFileName;
 }
 
-export {setNewFileName}
+export {setNewFileName};
