@@ -1,7 +1,8 @@
 import {CustomButton} from 'Components/';
+import {BUTTON, USER_LANGUAGE} from "Languages";
 
 function createButtonCancel() {
-  const buttonCancel = new CustomButton('CANCEL');
+  const buttonCancel = new CustomButton(BUTTON.CANCEL[USER_LANGUAGE]);
 
   const buttonCancelAttributes = {
     type: 'button',

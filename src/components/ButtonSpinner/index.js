@@ -1,4 +1,5 @@
 import BasicElement from 'Components/BasicElement';
+import {BUTTON, USER_LANGUAGE} from "Languages";
 
 function ButtonSpinner(oldButton) {
   // test
@@ -16,7 +17,7 @@ function ButtonSpinner(oldButton) {
   newButton.setAttribute({
     disabled: 'disabled',
   });
-  newButton.setInnerHTML('DOWNLOADING... ');
+  newButton.setInnerHTML(`${BUTTON.DOWNLOADING[USER_LANGUAGE]}... `);
   newButton.getElement().appendChild(loadingSpinner.getElement());
 
   return {buttonHaveLoadingSpinner: newButton, loadingSpinner};
