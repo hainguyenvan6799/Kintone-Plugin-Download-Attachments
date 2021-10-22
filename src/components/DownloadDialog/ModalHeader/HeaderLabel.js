@@ -1,10 +1,10 @@
 import {CustomLabel} from 'Components/';
-import {LABEL, USER_LANGUAGE} from "Languages";
+import {LABEL_TEXT} from 'Languages';
 
 function createHeaderLabel() {
   const headerLabel = new CustomLabel();
 
-  headerLabel.setInnerHTML(LABEL.BULK_DOWNLOAD_ATTACHMENTS[USER_LANGUAGE]);
+  headerLabel.setInnerHTML(LABEL_TEXT('BULK_DOWNLOAD_ATTACHMENTS'));
 
   return headerLabel;
 }

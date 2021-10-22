@@ -1,8 +1,8 @@
 import {CustomButton} from 'Components/';
-import {BUTTON, USER_LANGUAGE} from "Languages";
+import {BUTTON_TEXT} from 'Languages';
 
 function createButtonDownload() {
-  const buttonDownload = new CustomButton(BUTTON.DOWNLOAD[USER_LANGUAGE]);
+  const buttonDownload = new CustomButton(BUTTON_TEXT('DOWNLOAD'));
 
   const buttonDownloadAttributes = {
     type: 'button',

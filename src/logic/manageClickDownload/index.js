@@ -4,7 +4,7 @@ import {addfileURLs, checkFileSize, downloadFiles, getFileKeys} from 'Logics';
 import {getAppRecords} from 'Services';
 import {doZipFile, saveZipFile} from 'Utilities';
 import ManageDialogDownload from './manageDialogDownload';
-import {USER_LANGUAGE, ERROR, MESSAGE} from 'Languages';
+import {ERROR, MESSAGE} from 'Languages';
 
 class ManageClickDownload {
   constructor(pluginConfig, headerSpace, buttonDownload, recordsArray) {
@@ -23,7 +23,7 @@ class ManageClickDownload {
 
   handleAfterDownloadSuccess() {
     this.successMessage = new Notification({
-      text: MESSAGE.DOWNLOAD_COMPLETED[USER_LANGUAGE],
+      text: MESSAGE('DOWNLOAD_COMPLETED'),
       type: 'success',
       className: 'options-class',
     });
@@ -46,7 +46,7 @@ class ManageClickDownload {
   }
 
   handleDownloadFail(error) {
-    const errorMessage = error.message ? ERROR.ERROR_DURING_DOWNLOAD[USER_LANGUAGE] : error;
+    const errorMessage = error.message ? ERROR('ERROR_DURING_DOWNLOAD') : error;
 
     this.errorMessage = new Notification({
       text: errorMessage,
@@ -63,28 +63,6 @@ class ManageClickDownload {
       notificationElement.close();
     }, timeInMillisecons);
   }
-
-  // downloadAttachments(
-  //   buttonInstance,
-  //   listIds = null,
-  //   listSelectedFileKey = null
-  // ) {
-  //   const fieldCode = 'Attachment';
-  //   const isGuestSpace = false;
-
-  //   return getAppRecords(fieldCode, isGuestSpace, listIds)
-  //     .then((allRecords) =>
-  //       getFileKeys(allRecords, fieldCode, listSelectedFileKey)
-  //     )
-  //     .then((fileKeys) => checkFileSize(fileKeys, this.config.sizeLimit))
-  //     .then((fileKeys) => addfileURLs(fileKeys, isGuestSpace))
-  //     .then(downloadFiles)
-  //     .then(doZipFile)
-  //     .then(saveZipFile)
-  //     .then(() => this.handleAfterDownloadSuccess())
-  //     .catch((error) => this.handleDownloadFail(error))
-  //     .finally(() => this.handleAfterDoneDownload(buttonInstance));
-  // }
 
   downloadAttachments(
     buttonInstance,
@@ -107,18 +85,15 @@ class ManageClickDownload {
   }
 
   downloadNow(buttonInstance, listIdsCheckBoxesAreChecked = null) {
-    // todo: check
-    let buttonInstanze = buttonInstance;
     const {buttonHaveLoadingSpinner, loadingSpinner} =
-      new ButtonSpinner(buttonInstanze);
+      new ButtonSpinner(buttonInstance);
 
-    buttonInstanze = buttonHaveLoadingSpinner;
     this.spinnerInButton = loadingSpinner;
     this.manageDialogDownload &&
       this.manageDialogDownload.buttonCancel &&
       this.manageDialogDownload.buttonCancel.toggleDisable(true);
 
-    this.downloadAttachments(buttonInstanze, listIdsCheckBoxesAreChecked);
+    this.downloadAttachments(buttonHaveLoadingSpinner, listIdsCheckBoxesAreChecked);
   }
 }
 

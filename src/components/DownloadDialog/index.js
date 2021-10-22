@@ -26,16 +26,9 @@ function createDownloadAttachmentDialog(records, sizeLimitCanDownload) {
 
   addElementsToParentContainer(modalContent, [modalHeader, modalBody, modalFooter]);
 
-  // ToDo: check if alternate fail
-  // modalHeader.addSubElementToElement(modalContent.getElement());
-  // modalBody.addSubElementToElement(modalContent.getElement());
-  // modalFooter.addSubElementToElement(modalContent.getElement());
-
   addElementsToParentContainer(modalDialog, [modalContent]);
-  // modalContent.addSubElementToElement(modalDialog.getElement());
 
   addElementsToParentContainer(downloadModal, [modalDialog]);
-  // modalDialog.addSubElementToElement(downloadModal.getElement());
 
   return {
     downloadModal,

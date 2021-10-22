@@ -20,11 +20,11 @@ function createRecordCheckBox(record) {
 
   const recordCheckBox = createCheckBoxDialog(
     'selectRecord',
-    `${record.Task.value}_${record.Record_number.value}`,
+    `Record_${record.Record_number.value}`,
     checkBoxValueInString
   );
   const labelForRecordCheckBox = createLabelCheckBoxDialog(
-    `${record.Task.value}_${record.Record_number.value}`
+    `Record_${record.Record_number.value}`
   );
 
   const containerRecordCheckBoxAndLabel = createContainerCheckBoxAndLabel(
@@ -49,7 +49,6 @@ function createRecordsCheckBox(records) {
 
     addElementsToParentContainer(containerRecordsCheckBox, [containerRecordCheckBoxAndLabel]);
 
-    // todo: check
     return record;
   });
 

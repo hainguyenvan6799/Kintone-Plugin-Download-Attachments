@@ -10,13 +10,8 @@ module.exports = {
     "jQuery": "readonly",
     "saveAs": "readonly",
     "moment": "readonly"
-}
-  // "parserOptions": {
-  //   "ecmaVersion": 2017
-  // },
-  // sourceType: "module",
-  // "env": {
-  //   "node": true,
-  //   "es6": true
-  // }
+  },
+  "rules": {
+    "new-cap": 0
+  }
 };

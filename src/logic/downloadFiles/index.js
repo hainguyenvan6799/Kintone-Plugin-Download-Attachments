@@ -5,9 +5,7 @@ function downloadFile(zipTool, fileDownload, indexOfFile) {
         reject(error);
       }
       const recordAttachments = zipTool.folder(fileDownload.title);
-      // recordAttachments.file(`${Date.now() + indexOfFile}_${fileDownload.name}`, data, {
-      //   binary: true,
-      // });
+
       recordAttachments.file(`${fileDownload.name}`, data, {
         binary: true,
       });
@@ -18,7 +16,6 @@ function downloadFile(zipTool, fileDownload, indexOfFile) {
 }
 
 function downloadFiles(filesDownload, anotherZip) {
-  console.log('filesDownload: ', filesDownload);
   const zipTool = anotherZip || new JSZip();
 
   return Promise.all(filesDownload.map((fileDownload, indexOfFile) => downloadFile(zipTool, fileDownload, indexOfFile)))

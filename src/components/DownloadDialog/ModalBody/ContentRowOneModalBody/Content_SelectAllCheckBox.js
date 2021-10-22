@@ -1,7 +1,7 @@
 import {CustomDiv} from 'Components';
 import {addElementsToParentContainer} from 'Utilities';
 import {createCheckBoxDialog, createContainerCheckBoxAndLabel, createLabelCheckBoxDialog} from '../CheckBoxAndLabel';
-import {LABEL, USER_LANGUAGE} from "Languages";
+import {LABEL_TEXT} from 'Languages';
 
 function createColumnContainSelectAllCheckBox() {
   const columnContainSelectAllCheckBox = new CustomDiv();
@@ -22,7 +22,7 @@ function createContentSelectAllCheckBoxAndLabelContainer() {
   const containerSelectAllCheckBoxAndLabel = createContainerCheckBoxAndLabel(
     selectAllCheckBox,
     labelForSelectAllCheckBox,
-    LABEL.SELECT_ALL_RECORDS[USER_LANGUAGE],
+    LABEL_TEXT('SELECT_ALL_RECORDS'),
   );
 
   return {containerSelectAllCheckBoxAndLabel, selectAllCheckBox};
