@@ -5,6 +5,9 @@ function setNewFileName(fileKeys, propertyToCheck = 'name') {
 
   if (fileKeys && propertyToCheck) {
     newValues = fileKeys.map(fileItem => {
+      if(Object.prototype.hasOwnProperty.call(fileItem, propertyToCheck)) {
+        return fileItem;
+      }
       const [fileName, fileExtension] = fileItem[propertyToCheck].split('.');
 
       if (fileName && fileExtension) {
