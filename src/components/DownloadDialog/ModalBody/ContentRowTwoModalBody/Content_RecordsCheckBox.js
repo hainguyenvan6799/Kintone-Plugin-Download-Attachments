@@ -30,7 +30,7 @@ function createRecordCheckBox(record) {
   const containerRecordCheckBoxAndLabel = createContainerCheckBoxAndLabel(
     recordCheckBox,
     labelForRecordCheckBox,
-    record.Task.value
+    `Record_${record.Record_number.value}`
   );
 
   const containerRecordCheckBoxAndLabelAttributes = {
