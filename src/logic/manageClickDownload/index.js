@@ -3,8 +3,8 @@ import {Notification} from 'kintone-ui-component';
 import {addfileURLs, checkFileSize, downloadFiles, getFileKeys} from 'Logics';
 import {getAppRecords} from 'Services';
 import {doZipFile, saveZipFile} from 'Utilities';
-import { setNewFileName } from '../setNewFileName';
 import ManageDialogDownload from './manageDialogDownload';
+import {ERROR, MESSAGE} from 'Languages';
 
 class ManageClickDownload {
   constructor(pluginConfig, headerSpace, buttonDownload, recordsArray) {
@@ -23,7 +23,7 @@ class ManageClickDownload {
 
   handleAfterDownloadSuccess() {
     this.successMessage = new Notification({
-      text: 'Download Completed.',
+      text: MESSAGE('DOWNLOAD_COMPLETED'),
       type: 'success',
       className: 'options-class',
     });
@@ -46,8 +46,7 @@ class ManageClickDownload {
   }
 
   handleDownloadFail(error) {
-    const errorMessage = error.message ? error.message : error;
-    // 'Errors occur during download.'
+    const errorMessage = error.message ? ERROR('ERROR_DURING_DOWNLOAD') : error;
 
     this.errorMessage = new Notification({
       text: errorMessage,
@@ -65,28 +64,6 @@ class ManageClickDownload {
     }, timeInMillisecons);
   }
 
-  // downloadAttachments(
-  //   buttonInstance,
-  //   listIds = null,
-  //   listSelectedFileKey = null
-  // ) {
-  //   const fieldCode = 'Attachment';
-  //   const isGuestSpace = false;
-
-  //   return getAppRecords(fieldCode, isGuestSpace, listIds)
-  //     .then((allRecords) =>
-  //       getFileKeys(allRecords, fieldCode, listSelectedFileKey)
-  //     )
-  //     .then((fileKeys) => checkFileSize(fileKeys, this.config.sizeLimit))
-  //     .then((fileKeys) => addfileURLs(fileKeys, isGuestSpace))
-  //     .then(downloadFiles)
-  //     .then(doZipFile)
-  //     .then(saveZipFile)
-  //     .then(() => this.handleAfterDownloadSuccess())
-  //     .catch((error) => this.handleDownloadFail(error))
-  //     .finally(() => this.handleAfterDoneDownload(buttonInstance));
-  // }
-
   downloadAttachments(
     buttonInstance,
     listIds = null,
@@ -99,7 +76,6 @@ class ManageClickDownload {
       )
       .then((fileKeys) => checkFileSize(fileKeys, this.config.sizeLimit))
       .then((fileKeys) => addfileURLs(fileKeys))
-      .then((fileKeys) => setNewFileName(fileKeys, "name"))
       .then(downloadFiles)
       .then(doZipFile)
       .then(saveZipFile)
@@ -110,15 +86,14 @@ class ManageClickDownload {
 
   downloadNow(buttonInstance, listIdsCheckBoxesAreChecked = null) {
     const {buttonHaveLoadingSpinner, loadingSpinner} =
-      ButtonSpinner(buttonInstance);
+      new ButtonSpinner(buttonInstance);
 
-    buttonInstance = buttonHaveLoadingSpinner;
     this.spinnerInButton = loadingSpinner;
     this.manageDialogDownload &&
       this.manageDialogDownload.buttonCancel &&
       this.manageDialogDownload.buttonCancel.toggleDisable(true);
 
-    this.downloadAttachments(buttonInstance, listIdsCheckBoxesAreChecked);
+    this.downloadAttachments(buttonHaveLoadingSpinner, listIdsCheckBoxesAreChecked);
   }
 }
 

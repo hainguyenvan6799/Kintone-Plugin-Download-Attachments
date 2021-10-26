@@ -1,10 +1,10 @@
-import { createDownloadAttachmentDialog } from "Components/DownloadDialog";
+import {createDownloadAttachmentDialog} from 'Components/DownloadDialog';
 import {
   checkedAllCheckBoxWithName,
   getCheckBoxesAreCheckedWithName,
   getRecordsAttachmentsSize,
   warningBaseOnTotalSize,
-} from "Logics";
+} from 'Logics';
 
 class ManageDialogDownload {
   constructor(manageClickDownload) {
@@ -12,11 +12,11 @@ class ManageDialogDownload {
     this.showSelectDownloadDialog();
   }
 
-  getRecordsHaveAttachments = () => {
+  getRecordsHaveAttachments() {
     return this.manageClickDownload.recordsArray.filter(
       (recordObject) => recordObject.Attachment.value.length > 0
     );
-  };
+  }
 
   doWarningBaseOnTotalSize(totalSize) {
     warningBaseOnTotalSize({
@@ -37,7 +37,7 @@ class ManageDialogDownload {
 
   handleClickDownloadInDialog() {
     const valueOfCheckBoxAreChecked =
-      getCheckBoxesAreCheckedWithName("selectRecord");
+      getCheckBoxesAreCheckedWithName('selectRecord');
     const listIdsCheckBoxesAreChecked = valueOfCheckBoxAreChecked.map(
       (checkBox) => checkBox.recordId
     );
@@ -51,7 +51,7 @@ class ManageDialogDownload {
   handleWhenChangeSelectAllCheckBox() {
     const allCheckBoxesValueArray = checkedAllCheckBoxWithName(
       this.checkboxSelectAll.getElement(),
-      "selectRecord"
+      'selectRecord'
     );
 
     const newTotalSize = allCheckBoxesValueArray.reduce(
@@ -69,21 +69,20 @@ class ManageDialogDownload {
     let newTotalSize = this.totalSize;
     if (event.target !== event.currentTarget) {
       const clickedCheckBoxValue = JSON.parse(event.target.value);
-      const { recordAttachmentSize } = clickedCheckBoxValue;
+      const {recordAttachmentSize} = clickedCheckBoxValue;
 
       event.target.checked
         ? (newTotalSize += recordAttachmentSize)
         : (newTotalSize -= recordAttachmentSize);
 
       this.doWarningBaseOnTotalSize(newTotalSize);
-
-      return newTotalSize;
     }
+    return newTotalSize;
   }
 
   handleWhenClickFullScreenIcon() {
     this.modalDialog.setAttribute({
-      class: "modal-dialog fullscreen",
+      class: 'modal-dialog fullscreen',
     });
   }
 
@@ -94,23 +93,23 @@ class ManageDialogDownload {
   }
 
   listenAllElement() {
-    this.buttonDownloadInDialog.addGlobalEventListener("click", () =>
+    this.buttonDownloadInDialog.addGlobalEventListener('click', () =>
       this.handleClickDownloadInDialog()
     );
 
-    this.checkboxSelectAll.addGlobalEventListener("change", () => {
+    this.checkboxSelectAll.addGlobalEventListener('change', () => {
       this.totalSize = this.handleWhenChangeSelectAllCheckBox();
     });
 
-    this.containerCheckBoxRecords.addGlobalEventListener("change", (event) => {
+    this.containerCheckBoxRecords.addGlobalEventListener('change', (event) => {
       this.totalSize = this.handleWhenChangeSelectRecordCheckBox(event);
     });
 
-    this.buttonFullScreen.addGlobalEventListener("click", () =>
+    this.buttonFullScreen.addGlobalEventListener('click', () =>
       this.handleWhenClickFullScreenIcon()
     );
 
-    this.buttonCancel.addGlobalEventListener("click", () =>
+    this.buttonCancel.addGlobalEventListener('click', () =>
       this.handleWhenClickButtonCancel()
     );
   }

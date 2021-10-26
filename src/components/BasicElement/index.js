@@ -12,7 +12,9 @@ export default class BasicElement {
 
   setAttribute(attributeObject) {
     for (const keyStr in attributeObject) {
-      this.element.setAttribute(keyStr, attributeObject[keyStr]);
+      if (Object.prototype.hasOwnProperty.call(attributeObject, keyStr)) {
+        this.element.setAttribute(keyStr, attributeObject[keyStr]);
+      }
     }
   }
 
@@ -26,7 +28,9 @@ export default class BasicElement {
 
   setStyle(styleObject) {
     for (const keyStr in styleObject) {
-      this.label.style[keyStr] = styleObject[keyStr];
+      if (Object.prototype.hasOwnProperty.call(styleObject, keyStr)) {
+        this.label.style[keyStr] = styleObject[keyStr];
+      }
     }
   }
 

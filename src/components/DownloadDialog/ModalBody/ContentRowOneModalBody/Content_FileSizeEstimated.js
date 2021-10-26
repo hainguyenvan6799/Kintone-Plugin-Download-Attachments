@@ -1,6 +1,7 @@
 import {CustomDiv, CustomParagraph} from 'Components';
 import {addElementsToParentContainer} from 'Utilities';
 import BasicElement from 'Components/BasicElement';
+import {LABEL_TEXT} from 'Languages';
 
 function createCurrentTotalFileSize(currentTotalSize) {
   const elementToDisplaySize = new BasicElement('span', currentTotalSize);
@@ -9,7 +10,7 @@ function createCurrentTotalFileSize(currentTotalSize) {
 }
 
 function createLabelForCurrentTotalFileSize() {
-  const labelTotalSize = new CustomParagraph('Total/Size Limit: ');
+  const labelTotalSize = new CustomParagraph(LABEL_TEXT('TOTAL_AND_SIZE_LIMIT'));
   const labelTotalSizeAttributes = {
     class: 'float-right',
   };

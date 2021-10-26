@@ -27,6 +27,7 @@ function addElementsToParentContainer(
 ) {
   subElementsOfParentContainer.map((subElement) => {
     subElement.addSubElementToElement(parentContainer.getElement());
+    return subElement;
   });
 }
 

@@ -26,7 +26,8 @@ const config = {
       Logics: path.resolve(__dirname, 'src/logic/'),
       Screens: path.resolve(__dirname, 'src/screen/'),
       Services: path.resolve(__dirname, 'src/services/'),
-      Assets: path.resolve(__dirname, 'src/assets/')
+      Assets: path.resolve(__dirname, 'src/assets/'),
+      Languages: path.resolve(__dirname, 'src/language/'),
     },
   }
 };

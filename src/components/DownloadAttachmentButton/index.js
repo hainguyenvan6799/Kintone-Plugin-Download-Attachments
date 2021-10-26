@@ -1,7 +1,8 @@
 import {CustomButton} from '..';
+import {BUTTON_TEXT} from 'Languages';
 
 function createDownloadAttachmentButton() {
-  const buttonDownload = new CustomButton('Download Attachments');
+  const buttonDownload = new CustomButton(BUTTON_TEXT('DOWNLOAD_ATTACHMENTS'));
   const buttonDownloadAttributes = {
     type: 'button',
     class: 'btn btn-primary',

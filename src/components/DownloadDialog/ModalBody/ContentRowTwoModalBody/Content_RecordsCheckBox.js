@@ -20,17 +20,17 @@ function createRecordCheckBox(record) {
 
   const recordCheckBox = createCheckBoxDialog(
     'selectRecord',
-    `${record.Task.value}_${record.Record_number.value}`,
+    `Record_${record.Record_number.value}`,
     checkBoxValueInString
   );
   const labelForRecordCheckBox = createLabelCheckBoxDialog(
-    `${record.Task.value}_${record.Record_number.value}`
+    `Record_${record.Record_number.value}`
   );
 
   const containerRecordCheckBoxAndLabel = createContainerCheckBoxAndLabel(
     recordCheckBox,
     labelForRecordCheckBox,
-    record.Task.value
+    `Record_${record.Record_number.value}`
   );
 
   const containerRecordCheckBoxAndLabelAttributes = {
@@ -48,6 +48,8 @@ function createRecordsCheckBox(records) {
     const containerRecordCheckBoxAndLabel = createRecordCheckBox(record);
 
     addElementsToParentContainer(containerRecordsCheckBox, [containerRecordCheckBoxAndLabel]);
+
+    return record;
   });
 
   return containerRecordsCheckBox;

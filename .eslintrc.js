@@ -2,13 +2,16 @@
 'use strict';
 
 module.exports = {
-  // extends: ['@cybozu'],
-  "parserOptions": {
-    "ecmaVersion": 2017
+  extends: ['@cybozu'],
+  "globals": {
+    "kintone": "readonly",
+    "JSZipUtils": "readonly",
+    "JSZip": "readonly",
+    "jQuery": "readonly",
+    "saveAs": "readonly",
+    "moment": "readonly"
   },
-  sourceType: "module",
-  "env": {
-    "node": true,
-    "es6": true
+  "rules": {
+    "new-cap": 0
   }
 };
